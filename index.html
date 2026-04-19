@@ -1,0 +1,159 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.wrap{padding:20px 16px 32px;font-family:var(--font-sans)}
+.hdr{text-align:center;margin-bottom:20px}
+.hdr h1{font-size:15px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px}
+.hdr p{font-size:11px;color:var(--color-text-tertiary)}
+.user-row{display:flex;justify-content:center;margin-bottom:4px}
+.user-pill{background:#EEEDFE;border:1px solid #7F77DD;border-radius:20px;padding:8px 32px;font-size:13px;font-weight:500;color:#3C3489;letter-spacing:.2px}
+.down{text-align:center;color:var(--color-text-tertiary);font-size:18px;line-height:1.2;margin:2px 0}
+.down-sm{text-align:center;color:var(--color-text-tertiary);font-size:14px;line-height:1.2;margin:2px 0}
+.col-hdrs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:6px}
+.col-hdr{border-radius:8px;padding:8px 10px;font-size:12px;font-weight:500;text-align:center}
+.ch-teal{background:#E1F5EE;border:1px solid #1D9E75;color:#085041}
+.ch-blue{background:#E6F1FB;border:1px solid #185FA5;color:#0C447C}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+.nd{border-radius:8px;padding:9px 12px;margin-bottom:5px}
+.nd .t{font-size:12px;font-weight:500;margin-bottom:1px}
+.nd .s{font-size:10px;opacity:.8}
+.nd.tl{background:#E1F5EE;border:.5px solid #1D9E75;color:#085041}
+.nd.bl{background:#E6F1FB;border:.5px solid #185FA5;color:#0C447C}
+.nd.am{background:#FAEEDA;border:.5px solid #BA7517;color:#633806}
+.nd.gn{background:#EAF3DE;border:.5px solid #3B6D11;color:#27500A}
+.nd.pu{background:#EEEDFE;border:.5px solid #534AB7;color:#3C3489}
+.nd.gy{background:var(--color-background-secondary);border:.5px solid var(--color-border-primary);color:var(--color-text-secondary)}
+.gate{background:#FAEEDA;border:1px solid #EF9F27;border-radius:8px;padding:8px 10px;text-align:center;margin-bottom:5px}
+.gate .t{font-size:11px;font-weight:500;color:#633806}
+.gate .s{font-size:10px;color:#854F0B}
+.branch{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:5px}
+.blbl{font-size:10px;font-weight:500;text-align:center;padding:2px 0}
+.blbl.y{color:#27500A}.blbl.n{color:#A32D2D}
+.rag-box{background:var(--color-background-secondary);border:1px dashed var(--color-border-secondary);border-radius:10px;padding:10px;margin-bottom:5px}
+.rag-lbl{font-size:10px;font-weight:500;color:var(--color-text-tertiary);letter-spacing:.6px;margin-bottom:8px}
+.rag-nd{background:#E6F1FB;border:.5px solid #85B7EB;border-radius:7px;padding:7px 9px;margin-bottom:5px}
+.rag-nd .t{font-size:11px;font-weight:500;color:#0C447C;margin-bottom:1px}
+.rag-nd .s{font-size:10px;color:#185FA5}
+.rag-llm{background:#EEEDFE;border:.5px solid #7F77DD;border-radius:7px;padding:7px 9px;margin-bottom:5px}
+.rag-llm .t{font-size:11px;font-weight:500;color:#3C3489;margin-bottom:1px}
+.rag-llm .s{font-size:10px;color:#534AB7}
+.rag-2col{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:5px}
+.rag-2col .rag-nd{margin-bottom:0}
+.legend{display:flex;flex-wrap:wrap;gap:7px;padding:10px 14px;background:var(--color-background-secondary);border:.5px solid var(--color-border-tertiary);border-radius:8px;margin-top:16px}
+.li{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--color-text-secondary)}
+.ld{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+</style>
+
+<div class="wrap">
+
+<div class="hdr">
+  <h1>Agentic feature mart chatbot</h1>
+  <p>Feature creation pipeline · Business query (RAG) pipeline</p>
+</div>
+
+<div class="user-row">
+  <div class="user-pill">Internal user</div>
+</div>
+<div class="down">↓</div>
+
+<div class="col-hdrs">
+  <div class="col-hdr ch-teal">① Feature creation pipeline</div>
+  <div class="col-hdr ch-blue">② Business query (RAG) pipeline</div>
+</div>
+
+<div class="cols">
+
+  <!-- LEFT: FEATURE CREATION -->
+  <div>
+    <div class="nd tl"><div class="t">Use case agent</div><div class="s">Understands business intent</div></div>
+    <div class="down-sm">↓</div>
+    <div class="nd tl"><div class="t">Table selection agent</div><div class="s">Picks relevant Snowflake tables</div></div>
+    <div class="down-sm">↓</div>
+    <div class="nd tl"><div class="t">Snowflake MCP agent</div><div class="s">Fetch table / column / metadata</div></div>
+    <div class="down-sm">↓</div>
+    <div class="nd tl"><div class="t">Join planning agent</div><div class="s">Decides join strategy</div></div>
+    <div class="down-sm">↓</div>
+    <div class="nd tl"><div class="t">Snowflake MCP agent</div><div class="s">Run join sample SQL</div></div>
+    <div class="down-sm">↓</div>
+
+    <div class="gate"><div class="t">Transform required?</div><div class="s">Decision gate</div></div>
+
+    <div class="branch">
+      <div>
+        <div class="blbl y">YES ↓</div>
+        <div class="nd am"><div class="t">Transformation agent</div><div class="s">Flattening logic</div></div>
+        <div class="down-sm">↓</div>
+        <div class="nd am"><div class="t">Snowflake MCP agent</div><div class="s">Execute flattening</div></div>
+      </div>
+      <div>
+        <div class="blbl n">NO →</div>
+        <div class="nd gy" style="margin-top:34px"><div class="t">Skip transform</div><div class="s">Go straight to profiling</div></div>
+      </div>
+    </div>
+
+    <div class="down-sm">↓</div>
+    <div class="nd tl"><div class="t">Sample profiling agent</div><div class="s">Profiles joined sample data</div></div>
+    <div class="down-sm">↓</div>
+    <div class="nd tl"><div class="t">Feature planning agent</div><div class="s">Plans features to create</div></div>
+    <div class="down-sm">↓</div>
+    <div class="nd tl"><div class="t">Sample feature agent</div><div class="s">Generates feature code</div></div>
+    <div class="down-sm">↓</div>
+    <div class="nd tl"><div class="t">Snowflake MCP agent</div><div class="s">Run SQL sample</div></div>
+    <div class="down-sm">↓</div>
+
+    <div class="gate"><div class="t">Validation agent</div><div class="s">Valid? NO → loop back · YES → proceed</div></div>
+
+    <div class="down-sm">↓</div>
+    <div class="nd gn"><div class="t">Produce script</div><div class="s">Final feature script output</div></div>
+    <div class="down-sm">↓</div>
+    <div class="nd gn"><div class="t">Deployment agent (git)</div><div class="s">Push to repository</div></div>
+    <div class="down-sm">↓</div>
+    <div class="nd gn"><div class="t">Feature documentation</div><div class="s">Notify stakeholders · docs update</div></div>
+    <div class="down-sm">↓</div>
+    <div class="nd pu"><div class="t">Vector DB sync agent</div><div class="s">Embed features → write to vector DB</div></div>
+  </div>
+
+  <!-- RIGHT: RAG PIPELINE -->
+  <div>
+    <div class="nd bl"><div class="t">Ask / build features</div><div class="s">Natural language query entry</div></div>
+    <div class="down-sm">↓</div>
+
+    <div class="rag-box">
+      <div class="rag-lbl">RAG AGENT</div>
+
+      <div class="rag-nd"><div class="t">Query understanding</div><div class="s">Intent classification · DSPy</div></div>
+      <div class="down-sm">↓</div>
+      <div class="rag-nd"><div class="t">Query embedding</div><div class="s">text-embedding-3 · 1536 dims</div></div>
+      <div class="down-sm">↓</div>
+      <div class="rag-nd"><div class="t">Vector search (k=10)</div><div class="s">ANN over feature embeddings ← reads vector DB</div></div>
+      <div class="down-sm">↓</div>
+      <div class="rag-2col">
+        <div class="rag-nd"><div class="t">Reranking</div><div class="s">Refine to k=8</div></div>
+        <div class="rag-nd"><div class="t">Context builder</div><div class="s">Assemble chunks</div></div>
+      </div>
+      <div class="down-sm">↓</div>
+      <div class="rag-nd"><div class="t">Prompt assembly</div><div class="s">System + context + user query</div></div>
+      <div class="down-sm">↓</div>
+      <div class="rag-llm"><div class="t">LLM · GPT-4o (Azure OpenAI)</div><div class="s">Generates grounded response</div></div>
+      <div class="down-sm">↓</div>
+      <div class="rag-2col">
+        <div class="rag-nd"><div class="t">Hallucination check</div><div class="s">Validate vs context</div></div>
+        <div class="rag-nd"><div class="t">Citation builder</div><div class="s">Source references</div></div>
+      </div>
+    </div>
+
+    <div class="down-sm">↓</div>
+    <div class="nd gn"><div class="t">Response to user</div><div class="s">Grounded · cited · structured</div></div>
+  </div>
+
+</div>
+
+<div class="legend">
+  <div class="li"><div class="ld" style="background:#1D9E75"></div>Feature creation</div>
+  <div class="li"><div class="ld" style="background:#378ADD"></div>RAG query pipeline</div>
+  <div class="li"><div class="ld" style="background:#EF9F27"></div>Decision gate</div>
+  <div class="li"><div class="ld" style="background:#639922"></div>Deployment &amp; reporting</div>
+  <div class="li"><div class="ld" style="background:#7F77DD"></div>Vector DB sync</div>
+</div>
+
+</div>
