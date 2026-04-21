@@ -1,159 +1,940 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic Feature Mart Chatbot — Cars24</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-.wrap{padding:20px 16px 32px;font-family:var(--font-sans)}
-.hdr{text-align:center;margin-bottom:20px}
-.hdr h1{font-size:15px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px}
-.hdr p{font-size:11px;color:var(--color-text-tertiary)}
-.user-row{display:flex;justify-content:center;margin-bottom:4px}
-.user-pill{background:#EEEDFE;border:1px solid #7F77DD;border-radius:20px;padding:8px 32px;font-size:13px;font-weight:500;color:#3C3489;letter-spacing:.2px}
-.down{text-align:center;color:var(--color-text-tertiary);font-size:18px;line-height:1.2;margin:2px 0}
-.down-sm{text-align:center;color:var(--color-text-tertiary);font-size:14px;line-height:1.2;margin:2px 0}
-.col-hdrs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:6px}
-.col-hdr{border-radius:8px;padding:8px 10px;font-size:12px;font-weight:500;text-align:center}
-.ch-teal{background:#E1F5EE;border:1px solid #1D9E75;color:#085041}
-.ch-blue{background:#E6F1FB;border:1px solid #185FA5;color:#0C447C}
-.cols{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
-.nd{border-radius:8px;padding:9px 12px;margin-bottom:5px}
-.nd .t{font-size:12px;font-weight:500;margin-bottom:1px}
-.nd .s{font-size:10px;opacity:.8}
-.nd.tl{background:#E1F5EE;border:.5px solid #1D9E75;color:#085041}
-.nd.bl{background:#E6F1FB;border:.5px solid #185FA5;color:#0C447C}
-.nd.am{background:#FAEEDA;border:.5px solid #BA7517;color:#633806}
-.nd.gn{background:#EAF3DE;border:.5px solid #3B6D11;color:#27500A}
-.nd.pu{background:#EEEDFE;border:.5px solid #534AB7;color:#3C3489}
-.nd.gy{background:var(--color-background-secondary);border:.5px solid var(--color-border-primary);color:var(--color-text-secondary)}
-.gate{background:#FAEEDA;border:1px solid #EF9F27;border-radius:8px;padding:8px 10px;text-align:center;margin-bottom:5px}
-.gate .t{font-size:11px;font-weight:500;color:#633806}
-.gate .s{font-size:10px;color:#854F0B}
-.branch{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:5px}
-.blbl{font-size:10px;font-weight:500;text-align:center;padding:2px 0}
-.blbl.y{color:#27500A}.blbl.n{color:#A32D2D}
-.rag-box{background:var(--color-background-secondary);border:1px dashed var(--color-border-secondary);border-radius:10px;padding:10px;margin-bottom:5px}
-.rag-lbl{font-size:10px;font-weight:500;color:var(--color-text-tertiary);letter-spacing:.6px;margin-bottom:8px}
-.rag-nd{background:#E6F1FB;border:.5px solid #85B7EB;border-radius:7px;padding:7px 9px;margin-bottom:5px}
-.rag-nd .t{font-size:11px;font-weight:500;color:#0C447C;margin-bottom:1px}
-.rag-nd .s{font-size:10px;color:#185FA5}
-.rag-llm{background:#EEEDFE;border:.5px solid #7F77DD;border-radius:7px;padding:7px 9px;margin-bottom:5px}
-.rag-llm .t{font-size:11px;font-weight:500;color:#3C3489;margin-bottom:1px}
-.rag-llm .s{font-size:10px;color:#534AB7}
-.rag-2col{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:5px}
-.rag-2col .rag-nd{margin-bottom:0}
-.legend{display:flex;flex-wrap:wrap;gap:7px;padding:10px 14px;background:var(--color-background-secondary);border:.5px solid var(--color-border-tertiary);border-radius:8px;margin-top:16px}
-.li{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--color-text-secondary)}
-.ld{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg2: #f8f7f4;
+    --text: #111110;
+    --text2: #4a4a46;
+    --text3: #88887f;
+    --border: rgba(0,0,0,0.1);
+    --accent: #1a1a18;
+
+    --blue50: #E6F1FB; --blue100: #B5D4F4; --blue600: #185FA5; --blue800: #0C447C;
+    --teal50: #E1F5EE; --teal100: #9FE1CB; --teal600: #0F6E56; --teal800: #085041;
+    --purple50: #EEEDFE; --purple100: #CECBF6; --purple600: #534AB7; --purple800: #3C3489;
+    --amber50: #FAEEDA; --amber100: #FAC775; --amber600: #854F0B; --amber800: #633806;
+    --green50: #EAF3DE; --green100: #C0DD97; --green600: #3B6D11; --green800: #27500A;
+    --coral50: #FAECE7; --coral100: #F5C4B3; --coral600: #993C1D;
+    --gray50: #F1EFE8; --gray100: #D3D1C7; --gray600: #5F5E5A; --gray800: #444441;
+  }
+
+  @media print {
+    @page { size: A4 landscape; margin: 10mm; }
+    body { background: white; }
+    .no-print { display: none; }
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    border-bottom: 2px solid var(--accent);
+    padding: 20px 48px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    background: var(--bg);
+  }
+  .header-eyebrow {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text3);
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 5px;
+  }
+  .header-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.3px;
+  }
+  .header-right {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: flex-end;
+    max-width: 520px;
+  }
+  .htag {
+    font-size: 10px;
+    font-family: 'DM Mono', monospace;
+    font-weight: 400;
+    padding: 2px 9px;
+    border-radius: 20px;
+    background: var(--gray50);
+    color: var(--gray600);
+    border: 1px solid var(--gray100);
+  }
+
+  /* ── MAIN ── */
+  .main {
+    padding: 28px 36px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* ── FLOW ── */
+  .flow { display: flex; flex-direction: column; gap: 0; }
+
+  /* ── ROW ── */
+  .row { display: flex; align-items: stretch; gap: 0; }
+
+  .row-label-col {
+    width: 130px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    padding-right: 14px;
+  }
+  .row-label {
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    color: var(--text3);
+    text-align: right;
+    width: 100%;
+    line-height: 1.4;
+  }
+
+  /* ── NODES CONTAINER ── */
+  .nodes {
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    padding: 10px 0;
+  }
+
+  /* ── NODE ── */
+  .node {
+    flex: 1;
+    border-radius: 9px;
+    padding: 11px 13px 10px;
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    position: relative;
+  }
+  .node-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+  .node-sub {
+    font-size: 10.5px;
+    color: var(--text2);
+    line-height: 1.45;
+  }
+  .node-tag {
+    display: inline-block;
+    font-size: 9.5px;
+    font-family: 'DM Mono', monospace;
+    font-weight: 400;
+    padding: 2px 7px;
+    border-radius: 20px;
+    margin-top: 5px;
+    margin-right: 3px;
+  }
+
+  /* ── ARROW ── */
+  .arrow {
+    flex-shrink: 0;
+    width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text3);
+    font-size: 14px;
+  }
+  .arrow::after { content: '→'; }
+
+  /* ── VERTICAL CONNECTOR ── */
+  .v-connector {
+    display: flex;
+    align-items: center;
+    padding: 0 0 0 130px;
+    height: 28px;
+  }
+  .v-line {
+    width: 2px;
+    height: 28px;
+    background: var(--border);
+    margin-left: 20px;
+    position: relative;
+  }
+  .v-line::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: -4px;
+    width: 0; height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid var(--border);
+  }
+  .v-label {
+    font-size: 10px;
+    color: var(--text3);
+    font-family: 'DM Mono', monospace;
+    margin-left: 10px;
+  }
+
+  /* ── COLOR VARIANTS ── */
+  .node-blue   { background: var(--blue50);   border-color: var(--blue100); }
+  .node-blue .node-title { color: var(--blue800); }
+  .node-blue .node-sub   { color: var(--blue600); }
+
+  .node-teal   { background: var(--teal50);   border-color: var(--teal100); }
+  .node-teal .node-title { color: var(--teal800); }
+  .node-teal .node-sub   { color: var(--teal600); }
+
+  .node-purple { background: var(--purple50); border-color: var(--purple100); }
+  .node-purple .node-title { color: var(--purple800); }
+  .node-purple .node-sub   { color: var(--purple600); }
+
+  .node-amber  { background: var(--amber50);  border-color: var(--amber100); }
+  .node-amber .node-title  { color: var(--amber800); }
+  .node-amber .node-sub    { color: var(--amber600); }
+
+  .node-green  { background: var(--green50);  border-color: var(--green100); }
+  .node-green .node-title  { color: var(--green800); }
+  .node-green .node-sub    { color: var(--green600); }
+
+  .node-coral  { background: var(--coral50);  border-color: var(--coral100); }
+  .node-coral .node-title  { color: var(--coral600); }
+  .node-coral .node-sub    { color: var(--coral600); }
+
+  .node-gray   { background: var(--gray50);   border-color: var(--gray100); }
+  .node-gray .node-title   { color: var(--gray800); }
+  .node-gray .node-sub     { color: var(--gray600); }
+
+  .tag-blue   { background: var(--blue50);   color: var(--blue600);   border: 1px solid var(--blue100); }
+  .tag-teal   { background: var(--teal50);   color: var(--teal600);   border: 1px solid var(--teal100); }
+  .tag-purple { background: var(--purple50); color: var(--purple600); border: 1px solid var(--purple100); }
+  .tag-amber  { background: var(--amber50);  color: var(--amber600);  border: 1px solid var(--amber100); }
+  .tag-green  { background: var(--green50);  color: var(--green600);  border: 1px solid var(--green100); }
+  .tag-coral  { background: var(--coral50);  color: var(--coral600);  border: 1px solid var(--coral100); }
+  .tag-gray   { background: var(--gray50);   color: var(--gray600);   border: 1px solid var(--gray100); }
+
+  /* ── FUNNEL STRIP ── */
+  .funnel-strip {
+    background: var(--accent);
+    border-radius: 9px;
+    padding: 11px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+  }
+  .funnel-step {
+    font-size: 10.5px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.85);
+    font-family: 'DM Mono', monospace;
+    white-space: nowrap;
+  }
+  .funnel-arrow-w {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    flex-shrink: 0;
+  }
+
+  /* ── TWO-COLUMN PIPELINE ROW ── */
+  .pipeline-cols {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    padding: 10px 0;
+  }
+
+  /* ── PIPELINE COLUMN ── */
+  .pipeline-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .pipeline-col-header {
+    border-radius: 8px 8px 0 0;
+    padding: 8px 12px 7px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+  .pch-teal   { background: var(--teal600);   color: #fff; }
+  .pch-blue   { background: var(--blue600);   color: #fff; }
+
+  .pipeline-body {
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 9px 9px;
+    padding: 12px 12px 14px;
+    background: var(--bg2);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* ── MINI NODE (inside pipeline) ── */
+  .mnode {
+    border-radius: 7px;
+    padding: 8px 10px 7px;
+    border: 1px solid transparent;
+    margin-bottom: 3px;
+  }
+  .mnode-title {
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.3;
+    margin-bottom: 2px;
+  }
+  .mnode-sub {
+    font-size: 10px;
+    line-height: 1.4;
+    opacity: 0.85;
+  }
+  .mnode.tl   { background: var(--teal50);   border-color: var(--teal100);   }
+  .mnode.tl .mnode-title { color: var(--teal800); }
+  .mnode.tl .mnode-sub   { color: var(--teal600); }
+
+  .mnode.bl   { background: var(--blue50);   border-color: var(--blue100);   }
+  .mnode.bl .mnode-title { color: var(--blue800); }
+  .mnode.bl .mnode-sub   { color: var(--blue600); }
+
+  .mnode.am   { background: var(--amber50);  border-color: var(--amber100);  }
+  .mnode.am .mnode-title { color: var(--amber800); }
+  .mnode.am .mnode-sub   { color: var(--amber600); }
+
+  .mnode.gn   { background: var(--green50);  border-color: var(--green100);  }
+  .mnode.gn .mnode-title { color: var(--green800); }
+  .mnode.gn .mnode-sub   { color: var(--green600); }
+
+  .mnode.pu   { background: var(--purple50); border-color: var(--purple100); }
+  .mnode.pu .mnode-title { color: var(--purple800); }
+  .mnode.pu .mnode-sub   { color: var(--purple600); }
+
+  .mnode.gy   { background: var(--gray50);   border-color: var(--gray100);   }
+  .mnode.gy .mnode-title { color: var(--gray800); }
+  .mnode.gy .mnode-sub   { color: var(--gray600); }
+
+  /* ── MINI ARROW ── */
+  .marrow {
+    text-align: center;
+    color: var(--text3);
+    font-size: 12px;
+    line-height: 1;
+    margin: 2px 0;
+  }
+
+  /* ── DECISION GATE ── */
+  .gate {
+    background: var(--amber50);
+    border: 1px solid var(--amber100);
+    border-radius: 7px;
+    padding: 8px 10px 7px;
+    margin: 3px 0;
+    text-align: center;
+  }
+  .gate-title { font-size: 11px; font-weight: 600; color: var(--amber800); }
+  .gate-sub   { font-size: 10px; color: var(--amber600); margin-top: 1px; }
+
+  /* ── BRANCH ── */
+  .branch {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin: 3px 0;
+  }
+  .branch-label {
+    font-size: 9.5px;
+    font-weight: 600;
+    font-family: 'DM Mono', monospace;
+    text-align: center;
+    padding: 2px 0;
+    margin-bottom: 3px;
+  }
+  .branch-label.yes { color: var(--green600); }
+  .branch-label.no  { color: var(--coral600); }
+
+  /* ── RAG BOX ── */
+  .rag-box {
+    background: var(--blue50);
+    border: 1px dashed var(--blue100);
+    border-radius: 9px;
+    padding: 10px;
+    margin: 3px 0;
+  }
+  .rag-box-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    color: var(--blue600);
+    margin-bottom: 7px;
+  }
+
+  .rag-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    margin: 3px 0;
+  }
+
+  /* ── IMPACT ROW ── */
+  .impact-row {
+    display: flex;
+    gap: 12px;
+    flex: 1;
+  }
+  .impact-item {
+    flex: 1;
+    background: var(--green50);
+    border: 1px solid var(--green100);
+    border-radius: 8px;
+    padding: 9px 11px;
+  }
+  .impact-num {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--green600);
+    font-family: 'DM Mono', monospace;
+    line-height: 1.1;
+  }
+  .impact-label {
+    font-size: 9.5px;
+    color: var(--green800);
+    line-height: 1.35;
+    margin-top: 3px;
+  }
+
+  /* ── USER ENTRY BOX ── */
+  .user-entry-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 0 0 130px;
+    padding: 14px 0 0;
+  }
+  .user-entry-box {
+    background: var(--purple50);
+    border: 1.5px solid var(--purple100);
+    border-radius: 10px;
+    padding: 14px 32px 13px;
+    text-align: center;
+    width: 100%;
+    max-width: 700px;
+  }
+  .user-entry-box .title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--purple800);
+    margin-bottom: 4px;
+  }
+  .user-entry-box .sub {
+    font-size: 11px;
+    color: var(--purple600);
+    line-height: 1.5;
+  }
+  .user-entry-box .tags {
+    margin-top: 7px;
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* ── SPLIT ARROWS ── */
+  .split-arrow-wrap {
+    margin-left: 130px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+    height: 44px;
+  }
+  .split-arrow-wrap svg {
+    width: 100%;
+    max-width: 700px;
+    height: 44px;
+    overflow: visible;
+  }
+
+  /* ── PRINT BTN ── */
+  .print-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 9px 18px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+    z-index: 99;
+  }
+  .print-btn:hover { opacity: 1; }
+
+  /* ── LEGEND ── */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--gray50);
+    border: 1px solid var(--gray100);
+    border-radius: 8px;
+    margin-top: 4px;
+  }
+  .li {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    color: var(--text2);
+    font-family: 'DM Mono', monospace;
+  }
+  .ld {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
 </style>
+</head>
+<body>
 
-<div class="wrap">
-
-<div class="hdr">
-  <h1>Agentic feature mart chatbot</h1>
-  <p>Feature creation pipeline · Business query (RAG) pipeline</p>
-</div>
-
-<div class="user-row">
-  <div class="user-pill">Internal user</div>
-</div>
-<div class="down">↓</div>
-
-<div class="col-hdrs">
-  <div class="col-hdr ch-teal">① Feature creation pipeline</div>
-  <div class="col-hdr ch-blue">② Business query (RAG) pipeline</div>
-</div>
-
-<div class="cols">
-
-  <!-- LEFT: FEATURE CREATION -->
+<!-- ──────────── HEADER ──────────── -->
+<div class="header">
   <div>
-    <div class="nd tl"><div class="t">Use case agent</div><div class="s">Understands business intent</div></div>
-    <div class="down-sm">↓</div>
-    <div class="nd tl"><div class="t">Table selection agent</div><div class="s">Picks relevant Snowflake tables</div></div>
-    <div class="down-sm">↓</div>
-    <div class="nd tl"><div class="t">Snowflake MCP agent</div><div class="s">Fetch table / column / metadata</div></div>
-    <div class="down-sm">↓</div>
-    <div class="nd tl"><div class="t">Join planning agent</div><div class="s">Decides join strategy</div></div>
-    <div class="down-sm">↓</div>
-    <div class="nd tl"><div class="t">Snowflake MCP agent</div><div class="s">Run join sample SQL</div></div>
-    <div class="down-sm">↓</div>
+    <div class="header-eyebrow">Cars24 · FCU / Data Science · Internal Tooling</div>
+    <div class="header-title">Agentic Feature Mart Chatbot — System Architecture</div>
+  </div>
+  <div class="header-right">
+    <span class="htag">LangGraph</span>
+    <span class="htag">Snowflake MCP</span>
+    <span class="htag">GPT-4o (Azure)</span>
+    <span class="htag">DSPy</span>
+    <span class="htag">text-embedding-3</span>
+    <span class="htag">Vector DB</span>
+    <span class="htag">RAG</span>
+    <span class="htag">ANN k=10</span>
+    <span class="htag">Git auto-deploy</span>
+  </div>
+</div>
 
-    <div class="gate"><div class="t">Transform required?</div><div class="s">Decision gate</div></div>
+<!-- ──────────── MAIN ──────────── -->
+<div class="main">
+<div class="flow">
 
-    <div class="branch">
-      <div>
-        <div class="blbl y">YES ↓</div>
-        <div class="nd am"><div class="t">Transformation agent</div><div class="s">Flattening logic</div></div>
-        <div class="down-sm">↓</div>
-        <div class="nd am"><div class="t">Snowflake MCP agent</div><div class="s">Execute flattening</div></div>
-      </div>
-      <div>
-        <div class="blbl n">NO →</div>
-        <div class="nd gy" style="margin-top:34px"><div class="t">Skip transform</div><div class="s">Go straight to profiling</div></div>
+  <!-- USER ENTRY BOX -->
+  <div class="user-entry-wrap">
+    <div class="user-entry-box">
+      <div class="title">Internal User</div>
+      <div class="sub">Data scientist / ML engineer / analyst querying or creating features via natural language</div>
+      <div class="tags">
+        <span class="node-tag tag-purple">NL query or feature request</span>
+        <span class="node-tag tag-purple">Build feature</span>
+        <span class="node-tag tag-purple">Query existing feature</span>
       </div>
     </div>
-
-    <div class="down-sm">↓</div>
-    <div class="nd tl"><div class="t">Sample profiling agent</div><div class="s">Profiles joined sample data</div></div>
-    <div class="down-sm">↓</div>
-    <div class="nd tl"><div class="t">Feature planning agent</div><div class="s">Plans features to create</div></div>
-    <div class="down-sm">↓</div>
-    <div class="nd tl"><div class="t">Sample feature agent</div><div class="s">Generates feature code</div></div>
-    <div class="down-sm">↓</div>
-    <div class="nd tl"><div class="t">Snowflake MCP agent</div><div class="s">Run SQL sample</div></div>
-    <div class="down-sm">↓</div>
-
-    <div class="gate"><div class="t">Validation agent</div><div class="s">Valid? NO → loop back · YES → proceed</div></div>
-
-    <div class="down-sm">↓</div>
-    <div class="nd gn"><div class="t">Produce script</div><div class="s">Final feature script output</div></div>
-    <div class="down-sm">↓</div>
-    <div class="nd gn"><div class="t">Deployment agent (git)</div><div class="s">Push to repository</div></div>
-    <div class="down-sm">↓</div>
-    <div class="nd gn"><div class="t">Feature documentation</div><div class="s">Notify stakeholders · docs update</div></div>
-    <div class="down-sm">↓</div>
-    <div class="nd pu"><div class="t">Vector DB sync agent</div><div class="s">Embed features → write to vector DB</div></div>
   </div>
 
-  <!-- RIGHT: RAG PIPELINE -->
-  <div>
-    <div class="nd bl"><div class="t">Ask / build features</div><div class="s">Natural language query entry</div></div>
-    <div class="down-sm">↓</div>
+  <!-- SPLIT ARROWS: 2 arrows from user box to two pipelines -->
+  <div class="split-arrow-wrap">
+    <svg viewBox="0 0 700 44" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- vertical stem from top center -->
+      <line x1="350" y1="0" x2="350" y2="16" stroke="#C4C2B8" stroke-width="1.5"/>
+      <!-- horizontal bar -->
+      <line x1="175" y1="16" x2="525" y2="16" stroke="#C4C2B8" stroke-width="1.5"/>
+      <!-- left drop -->
+      <line x1="175" y1="16" x2="175" y2="38" stroke="#C4C2B8" stroke-width="1.5"/>
+      <!-- right drop -->
+      <line x1="525" y1="16" x2="525" y2="38" stroke="#C4C2B8" stroke-width="1.5"/>
+      <!-- left arrowhead -->
+      <polygon points="175,44 170,36 180,36" fill="#C4C2B8"/>
+      <!-- right arrowhead -->
+      <polygon points="525,44 520,36 530,36" fill="#C4C2B8"/>
+      <!-- left label -->
+      <text x="100" y="22" font-family="DM Mono,monospace" font-size="9" fill="#88887f">① Feature Creation</text>
+      <!-- right label -->
+      <text x="548" y="22" font-family="DM Mono,monospace" font-size="9" fill="#88887f">② RAG Query</text>
+    </svg>
+  </div>
 
-    <div class="rag-box">
-      <div class="rag-lbl">RAG AGENT</div>
-
-      <div class="rag-nd"><div class="t">Query understanding</div><div class="s">Intent classification · DSPy</div></div>
-      <div class="down-sm">↓</div>
-      <div class="rag-nd"><div class="t">Query embedding</div><div class="s">text-embedding-3 · 1536 dims</div></div>
-      <div class="down-sm">↓</div>
-      <div class="rag-nd"><div class="t">Vector search (k=10)</div><div class="s">ANN over feature embeddings ← reads vector DB</div></div>
-      <div class="down-sm">↓</div>
-      <div class="rag-2col">
-        <div class="rag-nd"><div class="t">Reranking</div><div class="s">Refine to k=8</div></div>
-        <div class="rag-nd"><div class="t">Context builder</div><div class="s">Assemble chunks</div></div>
-      </div>
-      <div class="down-sm">↓</div>
-      <div class="rag-nd"><div class="t">Prompt assembly</div><div class="s">System + context + user query</div></div>
-      <div class="down-sm">↓</div>
-      <div class="rag-llm"><div class="t">LLM · GPT-4o (Azure OpenAI)</div><div class="s">Generates grounded response</div></div>
-      <div class="down-sm">↓</div>
-      <div class="rag-2col">
-        <div class="rag-nd"><div class="t">Hallucination check</div><div class="s">Validate vs context</div></div>
-        <div class="rag-nd"><div class="t">Citation builder</div><div class="s">Source references</div></div>
-      </div>
+  <!-- ROW 2 — The two pipelines side-by-side -->
+  <div class="row" style="align-items:flex-start; margin-top:2px;">
+    <div class="row-label-col" style="align-items:flex-start; padding-top:14px;">
+      <div class="row-label">Agent<br>Pipelines</div>
     </div>
 
-    <div class="down-sm">↓</div>
-    <div class="nd gn"><div class="t">Response to user</div><div class="s">Grounded · cited · structured</div></div>
+    <div class="pipeline-cols">
+
+      <!-- ── LEFT: FEATURE CREATION ── -->
+      <div class="pipeline-col">
+        <div class="pipeline-col-header pch-teal">① Feature Creation Pipeline — Agentic (LangGraph)</div>
+        <div class="pipeline-body">
+
+          <div class="mnode tl">
+            <div class="mnode-title">Use-case agent</div>
+            <div class="mnode-sub">Parses business intent from user request</div>
+          </div>
+          <div class="marrow">↓</div>
+
+          <div class="mnode tl">
+            <div class="mnode-title">Table selection agent</div>
+            <div class="mnode-sub">Identifies relevant Snowflake tables</div>
+          </div>
+          <div class="marrow">↓</div>
+
+          <div class="mnode tl">
+            <div class="mnode-title">Snowflake MCP agent — fetch metadata</div>
+            <div class="mnode-sub">Retrieves table schema · column names · data types</div>
+          </div>
+          <div class="marrow">↓</div>
+
+          <div class="mnode tl">
+            <div class="mnode-title">Join planning agent</div>
+            <div class="mnode-sub">Determines optimal join strategy across tables</div>
+          </div>
+          <div class="marrow">↓</div>
+
+          <div class="mnode tl">
+            <div class="mnode-title">Snowflake MCP agent — run join sample</div>
+            <div class="mnode-sub">Executes sample join SQL · validates output shape</div>
+          </div>
+          <div class="marrow">↓</div>
+
+          <!-- Gate: Transform? -->
+          <div class="gate">
+            <div class="gate-title">⬡ Decision gate — Transform required?</div>
+            <div class="gate-sub">Checks if flattening / pivoting is needed</div>
+          </div>
+
+          <div class="branch">
+            <div>
+              <div class="branch-label yes">YES ↓</div>
+              <div class="mnode am">
+                <div class="mnode-title">Transformation agent</div>
+                <div class="mnode-sub">Builds flattening / unnest logic</div>
+              </div>
+              <div class="marrow">↓</div>
+              <div class="mnode am">
+                <div class="mnode-title">Snowflake MCP agent — execute transform</div>
+                <div class="mnode-sub">Runs flattening SQL on sample</div>
+              </div>
+            </div>
+            <div>
+              <div class="branch-label no">NO →</div>
+              <div class="mnode gy" style="margin-top:28px;">
+                <div class="mnode-title">Skip transform</div>
+                <div class="mnode-sub">Proceed directly to profiling</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="marrow">↓</div>
+
+          <div class="mnode tl">
+            <div class="mnode-title">Sample profiling agent</div>
+            <div class="mnode-sub">Null rates · cardinality · distribution stats</div>
+          </div>
+          <div class="marrow">↓</div>
+
+          <div class="mnode tl">
+            <div class="mnode-title">Feature planning agent</div>
+            <div class="mnode-sub">Proposes features to engineer from profiled sample</div>
+          </div>
+          <div class="marrow">↓</div>
+
+          <div class="mnode tl">
+            <div class="mnode-title">Sample feature agent</div>
+            <div class="mnode-sub">Generates Snowflake SQL feature code</div>
+          </div>
+          <div class="marrow">↓</div>
+
+          <div class="mnode tl">
+            <div class="mnode-title">Snowflake MCP agent — run feature SQL</div>
+            <div class="mnode-sub">Executes sample and returns output</div>
+          </div>
+          <div class="marrow">↓</div>
+
+          <!-- Gate: Validation -->
+          <div class="gate">
+            <div class="gate-title">⬡ Validation agent — Quality gate</div>
+            <div class="gate-sub">Valid? → YES → proceed · NO → loop back to feature planning</div>
+          </div>
+          <div class="marrow">↓</div>
+
+          <div class="mnode gn">
+            <div class="mnode-title">Produce feature script</div>
+            <div class="mnode-sub">Final validated SQL feature script generated</div>
+          </div>
+          <div class="marrow">↓</div>
+
+          <div class="mnode gn">
+            <div class="mnode-title">Deployment agent — git push</div>
+            <div class="mnode-sub">Auto-commits and pushes feature to repository</div>
+          </div>
+          <div class="marrow">↓</div>
+
+          <div class="mnode gn">
+            <div class="mnode-title">Documentation &amp; notification</div>
+            <div class="mnode-sub">Stakeholder notify · feature registry docs update</div>
+          </div>
+          <div class="marrow">↓</div>
+
+          <div class="mnode pu">
+            <div class="mnode-title">Vector DB sync agent</div>
+            <div class="mnode-sub">Embeds feature metadata → writes to vector store (feeds RAG pipeline)</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── RIGHT: RAG QUERY PIPELINE ── -->
+      <div class="pipeline-col">
+        <div class="pipeline-col-header pch-blue">② Business Query Pipeline — RAG (GPT-4o + DSPy)</div>
+        <div class="pipeline-body">
+
+          <div class="mnode bl">
+            <div class="mnode-title">User natural language query</div>
+            <div class="mnode-sub">e.g. "Is there a feature for monthly inspection count per city?"</div>
+          </div>
+          <div class="marrow">↓</div>
+
+          <!-- RAG agent box -->
+          <div class="rag-box">
+            <div class="rag-box-label">RAG agent · LangGraph orchestration</div>
+
+            <div class="mnode bl">
+              <div class="mnode-title">Query understanding</div>
+              <div class="mnode-sub">Intent classification · entity extraction · DSPy optimizer</div>
+            </div>
+            <div class="marrow">↓</div>
+
+            <div class="mnode bl">
+              <div class="mnode-title">Query embedding</div>
+              <div class="mnode-sub">text-embedding-3-small / large · 1536 dims · Azure OpenAI</div>
+            </div>
+            <div class="marrow">↓</div>
+
+            <div class="mnode bl">
+              <div class="mnode-title">Vector search (k=10)</div>
+              <div class="mnode-sub">ANN over feature mart vector DB · semantic similarity</div>
+            </div>
+            <div class="marrow">↓</div>
+
+            <div class="rag-2col">
+              <div class="mnode bl">
+                <div class="mnode-title">Reranking</div>
+                <div class="mnode-sub">Refine top candidates to k=8</div>
+              </div>
+              <div class="mnode bl">
+                <div class="mnode-title">Context builder</div>
+                <div class="mnode-sub">Assembles relevant chunk context</div>
+              </div>
+            </div>
+            <div class="marrow">↓</div>
+
+            <div class="mnode bl">
+              <div class="mnode-title">Prompt assembly</div>
+              <div class="mnode-sub">System prompt + retrieved context + user query → structured template</div>
+            </div>
+            <div class="marrow">↓</div>
+
+            <div class="mnode pu">
+              <div class="mnode-title">LLM — GPT-4o (Azure OpenAI)</div>
+              <div class="mnode-sub">Generates grounded response strictly from retrieved context</div>
+            </div>
+            <div class="marrow">↓</div>
+
+            <div class="rag-2col">
+              <div class="mnode am">
+                <div class="mnode-title">Hallucination check</div>
+                <div class="mnode-sub">Response validated vs. retrieved chunks</div>
+              </div>
+              <div class="mnode bl">
+                <div class="mnode-title">Citation builder</div>
+                <div class="mnode-sub">Source feature references attached</div>
+              </div>
+            </div>
+
+          </div><!-- /rag-box -->
+
+          <div class="marrow">↓</div>
+
+          <div class="mnode gn">
+            <div class="mnode-title">Response delivered to user</div>
+            <div class="mnode-sub">Grounded · cited · structured · hallucination-free</div>
+          </div>
+
+          <!-- Spacer to visually balance left column -->
+          <div style="height: 20px;"></div>
+
+          <!-- Tech stack summary inside right col -->
+          <div style="border:1px solid var(--blue100); border-radius:8px; padding:10px 11px; background:var(--blue50); margin-top:auto;">
+            <div style="font-size:9.5px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; font-family:'DM Mono',monospace; color:var(--blue600); margin-bottom:7px;">Tech stack — RAG pipeline</div>
+            <div style="display:flex; flex-wrap:wrap; gap:4px;">
+              <span class="node-tag tag-blue">Azure OpenAI GPT-4o</span>
+              <span class="node-tag tag-purple">DSPy intent classifier</span>
+              <span class="node-tag tag-blue">text-embedding-3</span>
+              <span class="node-tag tag-teal">ANN vector search</span>
+              <span class="node-tag tag-blue">Cross-encoder reranker</span>
+              <span class="node-tag tag-amber">Hallucination guard</span>
+              <span class="node-tag tag-green">Citation builder</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
   </div>
 
-</div>
+  <!-- CONNECTOR -->
+  <div class="v-connector">
+    <div class="v-line"></div>
+    <div class="v-label">Cross-pipeline integration</div>
+  </div>
 
-<div class="legend">
-  <div class="li"><div class="ld" style="background:#1D9E75"></div>Feature creation</div>
-  <div class="li"><div class="ld" style="background:#378ADD"></div>RAG query pipeline</div>
-  <div class="li"><div class="ld" style="background:#EF9F27"></div>Decision gate</div>
-  <div class="li"><div class="ld" style="background:#639922"></div>Deployment &amp; reporting</div>
-  <div class="li"><div class="ld" style="background:#7F77DD"></div>Vector DB sync</div>
-</div>
+  <!-- ROW 3 — Cross-pipeline integration -->
+  <div class="row">
+    <div class="row-label-col"><div class="row-label">Infra &amp;<br>Integration</div></div>
+    <div class="nodes">
 
-</div>
+      <div class="node node-teal" style="flex:1.1;">
+        <div class="node-title">Snowflake MCP</div>
+        <div class="node-sub">Shared tool across all agents · Schema fetch · SQL exec · Feature mart read/write</div>
+        <span class="node-tag tag-teal">Model Context Protocol</span>
+      </div>
+
+      <div class="arrow"></div>
+
+      <div class="node node-purple" style="flex:1.1;">
+        <div class="node-title">Vector DB</div>
+        <div class="node-sub">Written by Feature Creation pipeline · Read by RAG pipeline · Embedding index keeps in sync</div>
+        <span class="node-tag tag-purple">Shared embedding store</span>
+      </div>
+
+      <div class="arrow"></div>
+
+      <div class="node node-blue" style="flex:1.1;">
+        <div class="node-title">LangGraph orchestration</div>
+        <div class="node-sub">Multi-agent graph · Conditional branching · Retry loops · HITL hooks</div>
+        <span class="node-tag tag-blue">State-machine agents</span>
+      </div>
+
+      <div class="arrow"></div>
+
+      <div class="node node-amber" style="flex:1.1;">
+        <div class="node-title">Git auto-deployment</div>
+        <div class="node-sub">Validated feature scripts auto-pushed · CI hook triggers Snowflake job scheduling</div>
+        <span class="node-tag tag-amber">Feature mart CI/CD</span>
+      </div>
+
+      <div class="arrow"></div>
+
+      <div class="node node-gray" style="flex:1.1;">
+        <div class="node-title">Evaluation — RAGAS</div>
+        <div class="node-sub">Faithfulness · Answer relevancy · Context recall · Hallucination rate monitoring</div>
+        <span class="node-tag tag-gray">Continuous eval</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CONNECTOR -->
+  <div class="v-connector">
+    <div class="v-line"></div>
+    <div class="v-label">Business impact</div>
+  </div>
+
+  <!-- ROW 4 — Impact -->
+  <div class="row">
+    <div class="row-label-col"><div class="row-label">Business<br>Impact</div></div>
+    <div class="nodes">
+
+      <div class="impact-row">
+        <div class="impact-item">
+          <div class="impact-num">~80%</div>
+          <div class="impact-label">Reduction in feature development cycle time</div>
+        </div>
+        <div class="arrow" style="width:16px;"></div>
+        <div class="impact-item">
+          <div class="impact-num">NL → SQL</div>
+          <div class="impact-label">Non-engineers can query feature mart directly</div>
+        </div>
+        <div class="arrow" style="width:16px;"></div>
+        <div class="impact-item">
+          <div class="impact-num">Auto CI/CD</div>
+          <div class="impact-label">Features auto-deployed to Snowflake via git</div>
+        </div>
+        <div class="arrow" style="width:16px;"></div>
+        <div class="impact-item">
+          <div class="impact-num">Zero halluc.</div>
+          <div class="impact-label">Grounded RAG with citation + hallucination guard</div>
+        </div>
+        <div class="arrow" style="width:16px;"></div>
+        <div class="impact-item">
+          <div class="impact-num">1 system</div>
+          <div class="impact-label">Unified creation + discovery + documentation pipeline</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CONNECTOR -->
+  <div class="v-connector">
+    <div class="v-line"></div>
+    <div class="v-label">Legend</div>
+  </div>
+
+  <!-- ROW 5 — Legend -->
+  <div class="row">
+    <div class="row-label-col"><div class="row-label">Legend</div></div>
+    <div class="nodes">
+      <div class="legend">
+        <div class="li"><div class="ld" style="background:var(--teal600)"></div>Feature creation agents</div>
+        <div class="li"><div class="ld" style="background:var(--blue600)"></div>RAG query agents</div>
+        <div class="li"><div class="ld" style="background:var(--amber600)"></div>Decision / validation gate</div>
+        <div class="li"><div class="ld" style="background:var(--green600)"></div>Deployment &amp; output</div>
+        <div class="li"><div class="ld" style="background:var(--purple600)"></div>LLM / vector DB / orchestration</div>
+        <div class="li"><div class="ld" style="background:var(--gray600)"></div>Monitoring / evaluation</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /flow -->
+</div><!-- /main -->
+
+<button class="print-btn no-print" onclick="window.print()">Print / Save PDF</button>
+
+</body>
+</html>
