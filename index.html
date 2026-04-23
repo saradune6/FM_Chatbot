@@ -710,18 +710,9 @@
           </div>
           <div class="marrow">↓</div>
 
-          <!-- Memory pass: column size check -->
-          <div class="memory-pass">
-            <div class="memory-pass-icon">🧠</div>
-            <div class="memory-pass-text">
-              <strong>Memory pass →</strong> Column size check: if column count / width exceeds threshold, context summary is passed to next agent to avoid token overflow. MCP batches used for chunked metadata retrieval.
-            </div>
-          </div>
-          <div class="marrow">↓</div>
-
           <div class="mnode tl">
             <div class="mnode-title">Join planning agent</div>
-            <div class="mnode-sub">Receives column-size-aware context · determines optimal join strategy across tables</div>
+            <div class="mnode-sub">Determines optimal join strategy across tables</div>
           </div>
           <div class="marrow">↓</div>
 
@@ -835,7 +826,7 @@
 
             <div class="mnode bl">
               <div class="mnode-title">Query understanding</div>
-              <div class="mnode-sub">Intent classification · entity extraction ·  prompt technique for structured chain-of-thought prompting</div>
+              <div class="mnode-sub">Intent classification · entity extraction · structured chain-of-thought prompt technique</div>
             </div>
             <div class="marrow">↓</div>
 
@@ -865,7 +856,7 @@
 
             <div class="mnode bl">
               <div class="mnode-title">Prompt assembly</div>
-              <div class="mnode-sub">System prompt + retrieved context + user query → structured template</div>
+              <div class="mnode-sub">System prompt + retrieved context + user query → structured prompt template</div>
             </div>
             <div class="marrow">↓</div>
 
@@ -897,7 +888,7 @@
             <div style="font-size:9.5px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; font-family:'DM Mono',monospace; color:var(--blue600); margin-bottom:7px;">Tech stack — RAG pipeline</div>
             <div style="display:flex; flex-wrap:wrap; gap:4px;">
               <span class="node-tag tag-blue">AWS Bedrock GPT-4o</span>
-              <span class="node-tag tag-purple"> prompt technique</span>
+              <span class="node-tag tag-purple">Prompt technique</span>
               <span class="node-tag tag-blue">text-embedding-3</span>
               <span class="node-tag tag-teal">Semantic vector search</span>
               <span class="node-tag tag-blue">Cross-encoder reranker</span>
@@ -1057,7 +1048,6 @@
         <div class="li"><div class="ld" style="background:var(--green600)"></div>Deployment &amp; output</div>
         <div class="li"><div class="ld" style="background:var(--purple600)"></div>LLM / vector DB / orchestration</div>
         <div class="li"><div class="ld" style="background:var(--gray600)"></div>Monitoring / evaluation</div>
-        <div class="li"><div class="ld" style="background:var(--purple100); border:1px dashed var(--purple600)"></div>Memory pass (column-size aware)</div>
       </div>
     </div>
   </div>
