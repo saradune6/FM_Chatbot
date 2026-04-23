@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agentic Feature Mart Chatbot — Cars24</title>
+<title>Agentic Feature Mart Chatbot — Architecture</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -48,15 +48,6 @@
     justify-content: space-between;
     gap: 24px;
     background: var(--bg);
-  }
-  .header-eyebrow {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text3);
-    font-family: 'DM Mono', monospace;
-    margin-bottom: 5px;
   }
   .header-title {
     font-size: 20px;
@@ -402,21 +393,42 @@
     margin: 3px 0;
   }
 
+  /* ── MEMORY PASS BADGE ── */
+  .memory-pass {
+    background: var(--purple50);
+    border: 1px dashed var(--purple100);
+    border-radius: 6px;
+    padding: 5px 9px;
+    margin: 3px 0 3px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .memory-pass-icon { font-size: 11px; }
+  .memory-pass-text {
+    font-size: 9.5px;
+    font-family: 'DM Mono', monospace;
+    color: var(--purple600);
+    line-height: 1.35;
+  }
+
   /* ── IMPACT ROW ── */
   .impact-row {
     display: flex;
     gap: 12px;
     flex: 1;
+    flex-wrap: wrap;
   }
   .impact-item {
     flex: 1;
+    min-width: 130px;
     background: var(--green50);
     border: 1px solid var(--green100);
     border-radius: 8px;
     padding: 9px 11px;
   }
   .impact-num {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     color: var(--green600);
     font-family: 'DM Mono', monospace;
@@ -427,6 +439,95 @@
     color: var(--green800);
     line-height: 1.35;
     margin-top: 3px;
+  }
+  .impact-item.highlight {
+    background: var(--teal50);
+    border-color: var(--teal100);
+  }
+  .impact-item.highlight .impact-num { color: var(--teal600); }
+  .impact-item.highlight .impact-label { color: var(--teal800); }
+
+  /* ── BUSINESS IMPACT FULL SECTION ── */
+  .biz-impact-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .biz-impact-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .biz-impact-card {
+    border-radius: 9px;
+    padding: 11px 13px 10px;
+    border: 1px solid var(--green100);
+    background: var(--green50);
+  }
+  .biz-impact-card.teal-card {
+    background: var(--teal50);
+    border-color: var(--teal100);
+  }
+  .biz-impact-card.blue-card {
+    background: var(--blue50);
+    border-color: var(--blue100);
+  }
+  .biz-card-num {
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'DM Mono', monospace;
+    color: var(--green600);
+    line-height: 1.1;
+    margin-bottom: 3px;
+  }
+  .teal-card .biz-card-num { color: var(--teal600); }
+  .blue-card .biz-card-num { color: var(--blue600); }
+  .biz-card-label {
+    font-size: 10.5px;
+    font-weight: 500;
+    color: var(--green800);
+    line-height: 1.4;
+    margin-bottom: 2px;
+  }
+  .teal-card .biz-card-label { color: var(--teal800); }
+  .blue-card .biz-card-label { color: var(--blue800); }
+  .biz-card-sub {
+    font-size: 9.5px;
+    color: var(--green600);
+    line-height: 1.35;
+  }
+  .teal-card .biz-card-sub { color: var(--teal600); }
+  .blue-card .biz-card-sub { color: var(--blue600); }
+
+  .biz-consumers-row {
+    background: var(--accent);
+    border-radius: 9px;
+    padding: 11px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .biz-consumers-label {
+    font-size: 10px;
+    font-weight: 600;
+    font-family: 'DM Mono', monospace;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .biz-consumer-tag {
+    font-size: 10.5px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.88);
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 3px 10px;
+    white-space: nowrap;
   }
 
   /* ── USER ENTRY BOX ── */
@@ -532,18 +633,17 @@
 <!-- ──────────── HEADER ──────────── -->
 <div class="header">
   <div>
-    <div class="header-eyebrow">Cars24 · FCU / Data Science · Internal Tooling</div>
     <div class="header-title">Agentic Feature Mart Chatbot — System Architecture</div>
   </div>
   <div class="header-right">
     <span class="htag">LangGraph</span>
     <span class="htag">Snowflake MCP</span>
-    <span class="htag">GPT-4o (Azure)</span>
-    <span class="htag">DSPy</span>
+    <span class="htag">GPT-4o (AWS Bedrock)</span>
+    <span class="htag">Prompt Technique</span>
     <span class="htag">text-embedding-3</span>
     <span class="htag">Vector DB</span>
     <span class="htag">RAG</span>
-    <span class="htag">ANN k=10</span>
+    <span class="htag">MCP Batches</span>
     <span class="htag">Git auto-deploy</span>
   </div>
 </div>
@@ -568,21 +668,13 @@
   <!-- SPLIT ARROWS: 2 arrows from user box to two pipelines -->
   <div class="split-arrow-wrap">
     <svg viewBox="0 0 700 44" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- vertical stem from top center -->
       <line x1="350" y1="0" x2="350" y2="16" stroke="#C4C2B8" stroke-width="1.5"/>
-      <!-- horizontal bar -->
       <line x1="175" y1="16" x2="525" y2="16" stroke="#C4C2B8" stroke-width="1.5"/>
-      <!-- left drop -->
       <line x1="175" y1="16" x2="175" y2="38" stroke="#C4C2B8" stroke-width="1.5"/>
-      <!-- right drop -->
       <line x1="525" y1="16" x2="525" y2="38" stroke="#C4C2B8" stroke-width="1.5"/>
-      <!-- left arrowhead -->
       <polygon points="175,44 170,36 180,36" fill="#C4C2B8"/>
-      <!-- right arrowhead -->
       <polygon points="525,44 520,36 530,36" fill="#C4C2B8"/>
-      <!-- left label -->
       <text x="100" y="22" font-family="DM Mono,monospace" font-size="9" fill="#88887f">① Feature Creation</text>
-      <!-- right label -->
       <text x="548" y="22" font-family="DM Mono,monospace" font-size="9" fill="#88887f">② RAG Query</text>
     </svg>
   </div>
@@ -614,19 +706,28 @@
 
           <div class="mnode tl">
             <div class="mnode-title">Snowflake MCP agent — fetch metadata</div>
-            <div class="mnode-sub">Retrieves table schema · column names · data types</div>
+            <div class="mnode-sub">Retrieves table schema · column names · data types via MCP batch calls</div>
+          </div>
+          <div class="marrow">↓</div>
+
+          <!-- Memory pass: column size check -->
+          <div class="memory-pass">
+            <div class="memory-pass-icon">🧠</div>
+            <div class="memory-pass-text">
+              <strong>Memory pass →</strong> Column size check: if column count / width exceeds threshold, context summary is passed to next agent to avoid token overflow. MCP batches used for chunked metadata retrieval.
+            </div>
           </div>
           <div class="marrow">↓</div>
 
           <div class="mnode tl">
             <div class="mnode-title">Join planning agent</div>
-            <div class="mnode-sub">Determines optimal join strategy across tables</div>
+            <div class="mnode-sub">Receives column-size-aware context · determines optimal join strategy across tables</div>
           </div>
           <div class="marrow">↓</div>
 
           <div class="mnode tl">
             <div class="mnode-title">Snowflake MCP agent — run join sample</div>
-            <div class="mnode-sub">Executes sample join SQL · validates output shape</div>
+            <div class="mnode-sub">Executes sample join SQL via MCP batch · validates output shape</div>
           </div>
           <div class="marrow">↓</div>
 
@@ -719,7 +820,7 @@
 
       <!-- ── RIGHT: RAG QUERY PIPELINE ── -->
       <div class="pipeline-col">
-        <div class="pipeline-col-header pch-blue">② Business Query Pipeline — RAG (GPT-4o + DSPy)</div>
+        <div class="pipeline-col-header pch-blue">② Business Query Pipeline — RAG (GPT-4o + Prompt Technique)</div>
         <div class="pipeline-body">
 
           <div class="mnode bl">
@@ -734,26 +835,26 @@
 
             <div class="mnode bl">
               <div class="mnode-title">Query understanding</div>
-              <div class="mnode-sub">Intent classification · entity extraction · DSPy optimizer</div>
+              <div class="mnode-sub">Intent classification · entity extraction ·  prompt technique for structured chain-of-thought prompting</div>
             </div>
             <div class="marrow">↓</div>
 
             <div class="mnode bl">
               <div class="mnode-title">Query embedding</div>
-              <div class="mnode-sub">text-embedding-3-small / large · 1536 dims · Azure OpenAI</div>
+              <div class="mnode-sub">text-embedding-3-small / large · 1536 dims · AWS Bedrock</div>
             </div>
             <div class="marrow">↓</div>
 
             <div class="mnode bl">
-              <div class="mnode-title">Vector search (k=10)</div>
-              <div class="mnode-sub">ANN over feature mart vector DB · semantic similarity</div>
+              <div class="mnode-title">Vector search</div>
+              <div class="mnode-sub">Semantic similarity search over feature mart vector DB · top-k retrieval</div>
             </div>
             <div class="marrow">↓</div>
 
             <div class="rag-2col">
               <div class="mnode bl">
                 <div class="mnode-title">Reranking</div>
-                <div class="mnode-sub">Refine top candidates to k=8</div>
+                <div class="mnode-sub">Refine top candidates for best context fit</div>
               </div>
               <div class="mnode bl">
                 <div class="mnode-title">Context builder</div>
@@ -769,20 +870,14 @@
             <div class="marrow">↓</div>
 
             <div class="mnode pu">
-              <div class="mnode-title">LLM — GPT-4o (Azure OpenAI)</div>
+              <div class="mnode-title">LLM — GPT-4o (AWS Bedrock)</div>
               <div class="mnode-sub">Generates grounded response strictly from retrieved context</div>
             </div>
             <div class="marrow">↓</div>
 
-            <div class="rag-2col">
-              <div class="mnode am">
-                <div class="mnode-title">Hallucination check</div>
-                <div class="mnode-sub">Response validated vs. retrieved chunks</div>
-              </div>
-              <div class="mnode bl">
-                <div class="mnode-title">Citation builder</div>
-                <div class="mnode-sub">Source feature references attached</div>
-              </div>
+            <div class="mnode am">
+              <div class="mnode-title">Hallucination check</div>
+              <div class="mnode-sub">Response validated vs. retrieved chunks · grounded output only</div>
             </div>
 
           </div><!-- /rag-box -->
@@ -791,7 +886,7 @@
 
           <div class="mnode gn">
             <div class="mnode-title">Response delivered to user</div>
-            <div class="mnode-sub">Grounded · cited · structured · hallucination-free</div>
+            <div class="mnode-sub">Grounded · structured · hallucination-free</div>
           </div>
 
           <!-- Spacer to visually balance left column -->
@@ -801,13 +896,12 @@
           <div style="border:1px solid var(--blue100); border-radius:8px; padding:10px 11px; background:var(--blue50); margin-top:auto;">
             <div style="font-size:9.5px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; font-family:'DM Mono',monospace; color:var(--blue600); margin-bottom:7px;">Tech stack — RAG pipeline</div>
             <div style="display:flex; flex-wrap:wrap; gap:4px;">
-              <span class="node-tag tag-blue">Azure OpenAI GPT-4o</span>
-              <span class="node-tag tag-purple">DSPy intent classifier</span>
+              <span class="node-tag tag-blue">AWS Bedrock GPT-4o</span>
+              <span class="node-tag tag-purple"> prompt technique</span>
               <span class="node-tag tag-blue">text-embedding-3</span>
-              <span class="node-tag tag-teal">ANN vector search</span>
+              <span class="node-tag tag-teal">Semantic vector search</span>
               <span class="node-tag tag-blue">Cross-encoder reranker</span>
               <span class="node-tag tag-amber">Hallucination guard</span>
-              <span class="node-tag tag-green">Citation builder</span>
             </div>
           </div>
 
@@ -830,8 +924,9 @@
 
       <div class="node node-teal" style="flex:1.1;">
         <div class="node-title">Snowflake MCP</div>
-        <div class="node-sub">Shared tool across all agents · Schema fetch · SQL exec · Feature mart read/write</div>
+        <div class="node-sub">Shared tool across all agents · Schema fetch · SQL exec · Feature mart read/write · MCP batch processing for large schemas</div>
         <span class="node-tag tag-teal">Model Context Protocol</span>
+        <span class="node-tag tag-teal">MCP Batches</span>
       </div>
 
       <div class="arrow"></div>
@@ -846,7 +941,7 @@
 
       <div class="node node-blue" style="flex:1.1;">
         <div class="node-title">LangGraph orchestration</div>
-        <div class="node-sub">Multi-agent graph · Conditional branching · Retry loops · HITL hooks</div>
+        <div class="node-sub">Multi-agent graph · Conditional branching · Retry loops · HITL hooks · Memory context passing</div>
         <span class="node-tag tag-blue">State-machine agents</span>
       </div>
 
@@ -875,38 +970,73 @@
     <div class="v-label">Business impact</div>
   </div>
 
-  <!-- ROW 4 — Impact -->
+  <!-- ROW 4 — Business Impact (full, detailed) -->
   <div class="row">
     <div class="row-label-col"><div class="row-label">Business<br>Impact</div></div>
     <div class="nodes">
+      <div class="biz-impact-wrap">
 
-      <div class="impact-row">
-        <div class="impact-item">
-          <div class="impact-num">~80%</div>
-          <div class="impact-label">Reduction in feature development cycle time</div>
+        <!-- Revenue impact cards -->
+        <div class="biz-impact-grid">
+          <div class="biz-impact-card teal-card">
+            <div class="biz-card-num">₹5 Cr+/yr</div>
+            <div class="biz-card-label">Seller Pipeline</div>
+            <div class="biz-card-sub">Feature mart powering seller-side models and decisioning</div>
+          </div>
+          <div class="biz-impact-card">
+            <div class="biz-card-num">₹1 Cr/yr</div>
+            <div class="biz-card-label">CRM Features</div>
+            <div class="biz-card-sub">CRM intelligence features driving customer engagement lift</div>
+          </div>
+          <div class="biz-impact-card">
+            <div class="biz-card-num">₹1 Cr/yr</div>
+            <div class="biz-card-label">Insurance Model</div>
+            <div class="biz-card-sub">Features consumed by insurance underwriting &amp; pricing model</div>
+          </div>
+          <div class="biz-impact-card blue-card">
+            <div class="biz-card-num">Store Openings</div>
+            <div class="biz-card-label">Business Expansion</div>
+            <div class="biz-card-sub">Features actively used by business teams for store-opening location decisions</div>
+          </div>
         </div>
-        <div class="arrow" style="width:16px;"></div>
-        <div class="impact-item">
-          <div class="impact-num">NL → SQL</div>
-          <div class="impact-label">Non-engineers can query feature mart directly</div>
+
+        <!-- Product line consumers bar -->
+        <div class="biz-consumers-row">
+          <div class="biz-consumers-label">Consumed across →</div>
+          <span class="biz-consumer-tag">Buyer</span>
+          <span class="biz-consumer-tag">Used Car Loan</span>
+          <span class="biz-consumer-tag">Personal Loan</span>
+          <span class="biz-consumer-tag">Insurance</span>
+          <span class="biz-consumer-tag">CRM</span>
+          <span class="biz-consumer-tag">Store Expansion</span>
+          <span style="font-size:10px; color:rgba(255,255,255,0.45); font-family:'DM Mono',monospace; margin-left:4px;">— enabling intelligent, data-driven decision-making at scale across multiple product lines</span>
         </div>
-        <div class="arrow" style="width:16px;"></div>
-        <div class="impact-item">
-          <div class="impact-num">Auto CI/CD</div>
-          <div class="impact-label">Features auto-deployed to Snowflake via git</div>
+
+        <!-- Operational impact row -->
+        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px;">
+          <div class="biz-impact-card">
+            <div class="biz-card-num">~80%</div>
+            <div class="biz-card-label">Cycle Time Reduction</div>
+            <div class="biz-card-sub">Feature development end-to-end cycle time cut significantly</div>
+          </div>
+          <div class="biz-impact-card">
+            <div class="biz-card-num">NL → SQL</div>
+            <div class="biz-card-label">Self-serve for Non-engineers</div>
+            <div class="biz-card-sub">Business users query feature mart directly without SQL knowledge</div>
+          </div>
+          <div class="biz-impact-card">
+            <div class="biz-card-num">Auto CI/CD</div>
+            <div class="biz-card-label">Zero-touch Deployment</div>
+            <div class="biz-card-sub">Features auto-deployed to Snowflake via git on validation pass</div>
+          </div>
+          <div class="biz-impact-card">
+            <div class="biz-card-num">1 System</div>
+            <div class="biz-card-label">Unified Pipeline</div>
+            <div class="biz-card-sub">Creation + discovery + documentation + deployment in one agentic flow</div>
+          </div>
         </div>
-        <div class="arrow" style="width:16px;"></div>
-        <div class="impact-item">
-          <div class="impact-num">Zero halluc.</div>
-          <div class="impact-label">Grounded RAG with citation + hallucination guard</div>
-        </div>
-        <div class="arrow" style="width:16px;"></div>
-        <div class="impact-item">
-          <div class="impact-num">1 system</div>
-          <div class="impact-label">Unified creation + discovery + documentation pipeline</div>
-        </div>
+
       </div>
-
     </div>
   </div>
 
@@ -927,6 +1057,7 @@
         <div class="li"><div class="ld" style="background:var(--green600)"></div>Deployment &amp; output</div>
         <div class="li"><div class="ld" style="background:var(--purple600)"></div>LLM / vector DB / orchestration</div>
         <div class="li"><div class="ld" style="background:var(--gray600)"></div>Monitoring / evaluation</div>
+        <div class="li"><div class="ld" style="background:var(--purple100); border:1px dashed var(--purple600)"></div>Memory pass (column-size aware)</div>
       </div>
     </div>
   </div>
